@@ -50,5 +50,6 @@
   ],
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
-  }
+  },
+  "userSecretsId": "aspnet5-cw-itkpi-20160302054424"
 }
