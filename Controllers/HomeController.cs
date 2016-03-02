@@ -26,15 +26,6 @@ namespace itkpi_cw.Controllers
             return View(_context.Users.ToList());
         }
 
-        //public IActionResult WeeklyRating()
-        //{
-        //    var thisWeekRating = _context.WeeklyRatings
-        //        .Where(WeeklyRating => WeeklyRating.weekNumber == _context.WeeklyRatings.Count())
-        //        .Single();
-
-        //    return View(thisWeekRating);
-        //}
-
         public IActionResult Registration()
         {
             return View();
