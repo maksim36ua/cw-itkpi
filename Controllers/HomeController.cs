@@ -3,33 +3,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
+using cw_itkpi.Models;
+using System.Net;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace cw_itkpi.Controllers
+namespace itkpi_cw.Controllers
 {
     public class HomeController : Controller
     {
+        private UserContext _context;
+
+        public HomeController(UserContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            return View(_context.Users.ToList());
+        }
+
+        //public IActionResult WeeklyRating()
+        //{
+        //    var thisWeekRating = _context.WeeklyRatings
+        //        .Where(WeeklyRating => WeeklyRating.weekNumber == _context.WeeklyRatings.Count())
+        //        .Single();
+
+        //    return View(thisWeekRating);
+        //}
+
+        public IActionResult Registration()
+        {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Registration(UserInfo user)
         {
-            ViewData["Message"] = "Your application description page.";
+            if (ModelState.IsValid && !string.IsNullOrEmpty(user.RetrieveValues()))
+            {
+                user.ClearVkLink();
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return View(user);
         }
 
         public IActionResult Error()
         {
             return View();
         }
+
     }
 }

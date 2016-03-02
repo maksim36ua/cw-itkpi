@@ -20,4 +20,10 @@
     <DnxInvisibleContent Include="package.json" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Target Name="AfterBuild">
+   <Copy SourceFiles="HiddenSettings.Template.config"
+   DestinationFiles="HiddenSettings.config" SkipUnchangedFiles="true"
+   Condition="!Exists('HiddenSettings.config')">
+   </Copy>
+ </Target>
 </Project>
