@@ -19,7 +19,8 @@ namespace cw_itkpi
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables()
+                .AddUserSecrets();
 
             if (env.IsDevelopment())
             {
