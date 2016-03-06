@@ -23,6 +23,9 @@ namespace itkpi_cw.Controllers
 
         public IActionResult Index()
         {
+            _context.Users.OrderByDescending(user => user.thisWeekHonor);
+            _context.SaveChanges();
+
             return View(_context.Users.ToList());
         }
 
