@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace cwitkpi.Migrations
 {
-    public partial class Initialmigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,8 +15,10 @@ namespace cwitkpi.Migrations
                     username = table.Column<string>(nullable: false),
                     clan = table.Column<string>(nullable: true),
                     honor = table.Column<int>(nullable: false),
-                    vkLink = table.Column<string>(nullable: true),
-                    weeklyPoints = table.Column<int>(nullable: false)
+                    lastWeekHonor = table.Column<int>(nullable: false),
+                    pointsHistory = table.Column<string>(nullable: true),
+                    thisWeekHonor = table.Column<int>(nullable: false),
+                    vkLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

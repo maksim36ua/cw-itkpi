@@ -12,53 +12,74 @@ namespace cw_itkpi.Models
 {
     public class UserInfo
     {
-        private string nameId;
-        private string clanName;
-        private string vkPageLink;
-        private int points;
-        private int thisWeekRating;
+        private string _username;
+        private string _clan;
+        private string _vkLink;
+        private string _pointsHistory;
+        private int _honor;
+        private int _thisWeekHonor;
+        private int _lastWeekHonor;
+
 
         public UserInfo()
         {
             username = "";
+            pointsHistory = "0";
+            lastWeekHonor = 0;
         }
 
         public UserInfo(string name)
         {
             username = name;
+            pointsHistory = "0";
+            lastWeekHonor = 0;
         }
 
         [Key]
         public string username
         {
-            get { return nameId; }
-            set { nameId = value; }
+            get { return _username; }
+            set { _username = value; }
         }
 
         public int honor
         {
-            get { return points; }
-            set { points = value; }
+            get { return _honor; }
+            set { _honor = value; }
         }
 
-        public int weeklyPoints
+        public int thisWeekHonor
         {
-            get { return thisWeekRating; }
-            set { thisWeekRating = value; }
+            get { return _thisWeekHonor; }
+            set { _thisWeekHonor = value; }
+        }
+
+        public int lastWeekHonor
+        {
+            get { return _lastWeekHonor; }
+            set { _lastWeekHonor = value; }
         }
 
         public string clan
         {
-            get { return clanName; }
-            set { clanName = value; }
+            get { return _clan; }
+            set { _clan = value; }
         }
 
         [JsonIgnore]
         public string vkLink
         {
-            get { return vkPageLink; }
-            set { vkPageLink = value; }
+            get { return _vkLink; }
+            set { _vkLink = value; }
         }
+
+        [JsonIgnore]
+        public string pointsHistory
+        {
+            get { return _pointsHistory; }
+            set { _pointsHistory = value; }
+        }
+
 
         public string RetrieveValues()
         {
@@ -73,10 +94,14 @@ namespace cw_itkpi.Models
             }
             else
             {
+                // Deserialize JSON into itself object class
                 var jsonObject = JsonConvert.DeserializeObject<UserInfo>(json, jsonSerializerSettings);
 
                 honor = jsonObject.honor;
                 clan = jsonObject.clan;
+
+                ConfigurePoints();
+                
                 return "Ok";
             }
         }
@@ -114,6 +139,13 @@ namespace cw_itkpi.Models
                 else
                     vkLink = "";
             }
+        }
+
+        public void ConfigurePoints()
+        {
+            var pointsArray = pointsHistory.Split(' ');
+            lastWeekHonor = int.Parse(pointsArray.Last());
+            thisWeekHonor = honor - lastWeekHonor;
         }
     }
 }

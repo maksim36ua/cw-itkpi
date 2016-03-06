@@ -24,9 +24,13 @@ namespace cwitkpi.Migrations
 
                     b.Property<int>("honor");
 
-                    b.Property<string>("vkLink");
+                    b.Property<int>("lastWeekHonor");
 
-                    b.Property<int>("weeklyPoints");
+                    b.Property<string>("pointsHistory");
+
+                    b.Property<int>("thisWeekHonor");
+
+                    b.Property<string>("vkLink");
 
                     b.HasKey("username");
                 });

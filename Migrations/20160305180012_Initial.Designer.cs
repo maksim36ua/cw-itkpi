@@ -8,8 +8,8 @@ using cw_itkpi.Models;
 namespace cwitkpi.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20160302151003_Initial migration")]
-    partial class Initialmigration
+    [Migration("20160305180012_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,9 +25,13 @@ namespace cwitkpi.Migrations
 
                     b.Property<int>("honor");
 
-                    b.Property<string>("vkLink");
+                    b.Property<int>("lastWeekHonor");
 
-                    b.Property<int>("weeklyPoints");
+                    b.Property<string>("pointsHistory");
+
+                    b.Property<int>("thisWeekHonor");
+
+                    b.Property<string>("vkLink");
 
                     b.HasKey("username");
                 });

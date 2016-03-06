@@ -38,6 +38,7 @@ namespace itkpi_cw.Controllers
             if (ModelState.IsValid && !string.IsNullOrEmpty(user.RetrieveValues()))
             {
                 user.ClearVkLink();
+                user.thisWeekHonor = user.honor - user.lastWeekHonor;
                 _context.Users.Add(user);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
