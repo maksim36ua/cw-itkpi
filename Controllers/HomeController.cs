@@ -23,10 +23,7 @@ namespace itkpi_cw.Controllers
 
         public IActionResult Index()
         {
-            _context.Users.OrderByDescending(user => user.thisWeekHonor);
-            _context.SaveChanges();
-
-            return View(_context.Users.ToList());
+            return View(_context.Users.ToList().OrderByDescending(user => user.thisWeekHonor));
         }
 
         public IActionResult Registration()
@@ -38,6 +35,9 @@ namespace itkpi_cw.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Registration(UserInfo user)
         {
+            if (_context.Users.Any(userFromDb => userFromDb.username == user.username)) // Check if user already exists in the database
+                return View(user);
+
             if (ModelState.IsValid && !string.IsNullOrEmpty(user.RetrieveValues()))
             {
                 user.ClearVkLink();
