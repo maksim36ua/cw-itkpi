@@ -87,19 +87,6 @@ namespace cw_itkpi.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public void GenerateWeeklyRating()
-        {
-            _context.Users.ToList()
-                .ForEach(user =>
-                {
-                    user.RetrieveValues();
-                    user.pointsHistory += " " + user.honor;
-                    user.lastWeekHonor = user.honor;
-                    _context.Entry(user).State = Microsoft.Data.Entity.EntityState.Modified;
-                });
-            _context.SaveChanges();
-        }
-
         public void UpdateWeeklyRating()
         {
             _context.Users.ToList()
@@ -111,6 +98,21 @@ namespace cw_itkpi.Controllers
                 });
             _context.SaveChanges();
         }
+
+        public void GenerateWeeklyRating()
+        {
+            _context.Users.ToList()
+                .ForEach(user =>
+                {
+                    user.RetrieveValues();
+                    user.pointsHistory += " " + user.honor;
+                    user.lastWeekHonor = user.honor;
+                    _context.Entry(user).State = Microsoft.Data.Entity.EntityState.Modified;
+                });
+            _context.SaveChanges();
+
+            UpdateWeeklyRating();
+        }        
 
         public void DeleteWeeklyRating()
         {
@@ -132,6 +134,8 @@ namespace cw_itkpi.Controllers
                     _context.Entry(user).State = Microsoft.Data.Entity.EntityState.Modified;
                 });
             _context.SaveChanges();
+
+            UpdateWeeklyRating();
         }
     }
 }
