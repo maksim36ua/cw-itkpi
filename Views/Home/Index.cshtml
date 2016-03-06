@@ -1,9 +1,10 @@
-﻿@model IEnumerable<UserInfo>
+﻿@model List<UserInfo>
 
-<h2>Клан ІТ KPI</h2>
+<h2>ІТ KPI Clan</h2>
 
-<table class="table">
+<table class="table table-striped">
     <tr>
+        <th>Position</th>
         <th>Name</th>
         <th>This week points</th>
         <th>Previous rating points</th>
@@ -11,23 +12,43 @@
         <th>Clan</th>
     </tr>
 
-    @foreach (var item in Model)
+    @for (int i = 0; i < Model.Count; i++)
     {
-        <tr>
+        string color;
+        if (i <= 4)
+        {
+            color = "success";
+        }
+        else if (i > 4 && i < 10)
+        {
+            color = "info";
+        }
+        else if (i > 10 && i < 20)
+        {
+            color = "warning";
+        }
+        else
+        {
+            color = "";
+        }
+        <tr class="@color">
             <td>
-                @Html.DisplayFor(modelItem => item.username)
+                @(i+1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.thisWeekHonor)
+                @Html.DisplayFor(modelItem => modelItem[i].username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastWeekHonor)
+                @Html.DisplayFor(modelItem => modelItem[i].thisWeekHonor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.honor)
+                @Html.DisplayFor(modelItem => modelItem[i].lastWeekHonor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem[i].honor)
             </td>            
             <td>
-                @Html.DisplayFor(modelItem => item.clan)
+                @Html.DisplayFor(modelItem => modelItem[i].clan)
             </td>
             
         </tr>

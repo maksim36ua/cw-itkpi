@@ -23,7 +23,7 @@ namespace itkpi_cw.Controllers
 
         public IActionResult Index()
         {
-            return View(_context.Users.ToList().OrderByDescending(user => user.thisWeekHonor));
+            return View(_context.Users.OrderByDescending(user => user.thisWeekHonor).ToList());
         }
 
         public IActionResult Registration()

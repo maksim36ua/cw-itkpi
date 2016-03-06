@@ -17,6 +17,10 @@ textarea {
     max-width: 280px;
 }
 
+label {
+    text-align: left;
+}
+
 /* Carousel */
 .carousel-caption {
     z-index: 10 !important;
@@ -27,7 +31,7 @@ textarea {
         line-height: 1.4;
     }
 
-@media (min-width: 768px) {
+@media (min-width: 500px) {
     .carousel-caption {
         z-index: 10 !important;
     }
