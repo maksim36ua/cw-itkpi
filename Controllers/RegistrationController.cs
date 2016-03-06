@@ -21,14 +21,14 @@ namespace cw_itkpi.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Registration()
         {
-            return View();
+            return View("Registration");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(UserInfo user)
+        public IActionResult Registration(UserInfo user)
         {
             if (_context.Users.Any(userFromDb => userFromDb.username == user.username)) // Check if user already exists in the database
                 return View(user);
