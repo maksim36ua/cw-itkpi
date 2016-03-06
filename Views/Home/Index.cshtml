@@ -6,9 +6,9 @@
     <tr>
         <th>Name</th>
         <th>This week points</th>
+        <th>Points at the time of previous rating</th>
         <th>Total points</th>
         <th>Clan</th>
-        <th>VK Link</th>
     </tr>
 
     @foreach (var item in Model)
@@ -21,14 +21,15 @@
                 @Html.DisplayFor(modelItem => item.thisWeekHonor)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.honor)
+                @Html.DisplayFor(modelItem => item.lastWeekHonor)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.honor)
+            </td>            
             <td>
                 @Html.DisplayFor(modelItem => item.clan)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.vkLink)
-            </td>
+            
         </tr>
     }
 </table>
