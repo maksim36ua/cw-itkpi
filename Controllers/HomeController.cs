@@ -26,29 +26,29 @@ namespace itkpi_cw.Controllers
             return View(_context.Users.OrderByDescending(user => user.thisWeekHonor).ToList());
         }
 
-        public IActionResult Registration()
-        {
-            return View();
-        }
+        //public IActionResult Registration()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Registration(UserInfo user)
-        {
-            if (_context.Users.Any(userFromDb => userFromDb.username == user.username)) // Check if user already exists in the database
-                return View(user);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Registration(UserInfo user)
+        //{
+        //    if (_context.Users.Any(userFromDb => userFromDb.username == user.username)) // Check if user already exists in the database
+        //        return View(user);
 
-            if (ModelState.IsValid && !string.IsNullOrEmpty(user.RetrieveValues()))
-            {
-                user.ClearVkLink();
-                user.thisWeekHonor = user.honor - user.lastWeekHonor;
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //    if (ModelState.IsValid && !string.IsNullOrEmpty(user.RetrieveValues()))
+        //    {
+        //        user.ClearVkLink();
+        //        user.thisWeekHonor = user.honor - user.lastWeekHonor;
+        //        _context.Users.Add(user);
+        //        _context.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(user);
-        }
+        //    return View(user);
+        //}
 
         public IActionResult Error()
         {
