@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.Entity;
 using cw_itkpi.Models;
+using Microsoft.AspNet.Antiforgery;
 
 namespace cw_itkpi
 {
@@ -16,6 +17,7 @@ namespace cw_itkpi
     {
         public Startup(IHostingEnvironment env)
         {
+            
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -35,8 +37,16 @@ namespace cw_itkpi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
+
+            //services.AddAntiforgery();
+
+            services.ConfigureAntiforgery(options =>
+            {
+                options.SuppressXFrameOptionsHeader = true;
+            });
 
             services.AddEntityFramework()
                 .AddSqlServer()
@@ -62,6 +72,8 @@ namespace cw_itkpi
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+
 
             app.UseIISPlatformHandler();
 
