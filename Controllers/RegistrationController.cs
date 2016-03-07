@@ -21,6 +21,23 @@ namespace cw_itkpi.Controllers
             _context = context;
         }
 
+        public IActionResult RegSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult RegButton()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegButton(string submitButton)
+        {
+            return View("Registration");
+        }
+
         public IActionResult Registration()
         {
             return View("Registration");
@@ -39,7 +56,7 @@ namespace cw_itkpi.Controllers
                 user.thisWeekHonor = user.honor - user.lastWeekHonor;
                 _context.Users.Add(user);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return View("RegSuccess");
             }
 
             return View(user);

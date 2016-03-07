@@ -1,56 +1,67 @@
 ﻿@model List<UserInfo>
 
-<h2>ІТ KPI Clan</h2>
+<div class="container-fluid">
 
-<table class="table table-striped">
-    <tr>
-        <th>Position</th>
-        <th>Name</th>
-        <th>This week points</th>
-        <th>Previous rating points</th>
-        <th>Total points</th>
-        <th>Clan</th>
-    </tr>
+    <div class="col-md-8">
+        <h1>PLACE HOLDER</h1>
+    </div>
 
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        string color;
-        if (i <= 4)
-        {
-            color = "success";
-        }
-        else if (i > 4 && i < 10)
-        {
-            color = "info";
-        }
-        else if (i > 10 && i < 20)
-        {
-            color = "warning";
-        }
-        else
-        {
-            color = "";
-        }
-        <tr class="@color">
-            <td>
-                @(i+1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem[i].username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem[i].thisWeekHonor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem[i].lastWeekHonor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem[i].honor)
-            </td>            
-            <td>
-                @Html.DisplayFor(modelItem => modelItem[i].clan)
-            </td>
-            
-        </tr>
-    }
-</table>
+    <div class="col-md-4">
+        <iframe class="col" src="@Url.Action("RegButton","Registration")" width="400" height="400"></iframe>
+    </div>
+
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>This week points</th>
+                <th>Previous rating points</th>
+                <th>Total points</th>
+                <th>Clan</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                string color;
+                if (i <= 4)
+                {
+                    color = "success";
+                }
+                else if (i > 4 && i < 10)
+                {
+                    color = "info";
+                }
+                else if (i > 10 && i < 20)
+                {
+                    color = "warning";
+                }
+                else
+                {
+                    color = "";
+                }
+                <tr class="@color">
+                    <td>
+                        @(i + 1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].thisWeekHonor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].lastWeekHonor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].honor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem[i].clan)
+                    </td>
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>
