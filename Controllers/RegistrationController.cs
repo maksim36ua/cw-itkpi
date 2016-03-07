@@ -32,14 +32,6 @@ namespace cw_itkpi.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult RegButton(string submitButton)
-        {
-            return View("Registration");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Registration(UserInfo user)
         {
             if (_context.Users.Any(userFromDb => userFromDb.username == user.username)) // Check if user already exists in the database
