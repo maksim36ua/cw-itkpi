@@ -21,11 +21,6 @@ namespace cw_itkpi.Controllers
             _context = context;
         }
 
-        //public IActionResult RegSuccess()
-        //{
-        //    return RedirectToAction("Index", "Home");
-        //}
-
         public IActionResult RegButton()
         {
             return View();
