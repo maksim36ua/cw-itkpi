@@ -26,6 +26,12 @@ namespace itkpi_cw.Controllers
             return View(_context.Users.OrderByDescending(user => user.thisWeekHonor).ToList());
         }
 
+        [HttpPost]
+        public IActionResult Index(string value)
+        {
+            return RedirectToAction("Registration", "Registration");
+        }
+
         //public IActionResult RegSuccess()
         //{
         //    return View();

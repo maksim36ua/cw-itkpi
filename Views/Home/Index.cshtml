@@ -7,7 +7,11 @@
     </div>
 
     <div class="col-md-4">
-        <iframe class="col" src="@Url.Action("RegButton","Registration")" width="400" height="400"></iframe>
+        <form asp-controller="Home" asp-action="Index" method="post" class="form-horizontal" role="form">
+            <div class="col-md-12">
+                <input type="submit" value="Registration" name="Registration" class="btn btn-default" placeholder="Registration" />
+            </div>
+        </form>
     </div>
 
     <div class="col-md-12">
@@ -32,7 +36,7 @@
                 {
                     color = "info";
                 }
-                else if (i > 10 && i < 20)
+                else if (i >= 10 && i < 20)
                 {
                     color = "warning";
                 }
