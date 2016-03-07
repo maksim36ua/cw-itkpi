@@ -31,14 +31,14 @@ namespace cw_itkpi.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult RegButton(string submitButton)
-        //{
-        //    return View("Registration");
-        //}
-
         public IActionResult Registration()
+        {
+            return View("Registration");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RegButton(string submitButton)
         {
             return View("Registration");
         }

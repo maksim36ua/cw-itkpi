@@ -27,10 +27,10 @@ namespace itkpi_cw.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string value)
-        {
-            return RedirectToAction("Registration", "Registration");
-        }
+        //public IActionResult Index(string value)
+        //{
+        //    return RedirectToAction("Registration", "Registration");
+        //}
 
         //public IActionResult RegSuccess()
         //{
