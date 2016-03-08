@@ -25,6 +25,7 @@ namespace cw_itkpi.Controllers
             //password = secrets.Value.password;
 
             var builder = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
                 .AddUserSecrets();
             IConfigurationRoot Configuration = builder.Build();
             password = Configuration["Data:Password"];
