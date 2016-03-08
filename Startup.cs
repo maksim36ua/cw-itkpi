@@ -41,9 +41,9 @@ namespace cw_itkpi
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            //services.AddAntiforgery();
+            //services.AddAntiforgery();            
 
-            services.ConfigureAntiforgery(options =>
+            services.ConfigureAntiforgery(options => // Enables display in Iframe
             {
                 options.SuppressXFrameOptionsHeader = true;
             });
@@ -51,6 +51,8 @@ namespace cw_itkpi
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<UserContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            //services.Configure<SecretsClass>(Configuration);
 
             services.AddMvc();
         }
@@ -72,9 +74,7 @@ namespace cw_itkpi
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-
-
+            
             app.UseIISPlatformHandler();
 
             app.UseApplicationInsightsExceptionTelemetry();

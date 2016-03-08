@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using cw_itkpi.Models;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.OptionsModel;
 
 namespace cw_itkpi.Controllers
 {
@@ -11,8 +13,22 @@ namespace cw_itkpi.Controllers
     {
         private UserContext _context;
 
+        //public AdminController(UserContext context)
+        //{
+        //    _context = context;
+        //}
+
+        private string password { get; set; }
+
         public AdminController(UserContext context)
         {
+            //password = secrets.Value.password;
+
+            var builder = new ConfigurationBuilder()
+                .AddUserSecrets();
+            IConfigurationRoot Configuration = builder.Build();
+            password = Configuration["Data:Password"];
+
             _context = context;
         }
 
@@ -61,30 +77,35 @@ namespace cw_itkpi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Rating(string submitButton)
+        public IActionResult Rating(AdminClass admin)
         {
-            switch (submitButton)
+            if (admin.Password == password)
             {
-                case "Generate":
-                    {
-                        GenerateWeeklyRating();
-                        break;
-                    }
-                case "Update":
-                    {
-                        UpdateWeeklyRating();
-                        break;
-                    }
-                case "Delete":
-                    {
-                        DeleteWeeklyRating();
-                        break;
-                    }
-                default:
-                    return RedirectToAction("Index", "Home");
-            }         
+                switch (admin.actionToPerform)
+                {
+                    case "Generate":
+                        {
+                            GenerateWeeklyRating();
+                            break;
+                        }
+                    case "Update":
+                        {
+                            UpdateWeeklyRating();
+                            break;
+                        }
+                    case "Delete":
+                        {
+                            DeleteWeeklyRating();
+                            break;
+                        }
+                    default:
+                        return RedirectToAction("Index", "Home");
+                }
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return View();
         }
 
         public void UpdateWeeklyRating()
