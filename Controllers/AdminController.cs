@@ -145,11 +145,13 @@ namespace cw_itkpi.Controllers
 
                     if (user.pointsHistory.Contains(" "))
                     {
-                        var lastIndex = user.pointsHistory.LastIndexOf(' ');
-                        user.pointsHistory = user.pointsHistory.Substring(0, lastIndex);
-
                         var pointsArray = user.pointsHistory.Split(' ');  // Take last week honor for the basis
-                        user.lastWeekHonor = int.Parse(pointsArray.Last());
+                        user.thisWeekHonor = int.Parse(pointsArray.Last());
+                        user.lastWeekHonor = int.Parse(pointsArray[pointsArray.Length-2]);
+
+                        var lastIndex = user.pointsHistory.LastIndexOf(' '); // Delete points for last week
+                        user.pointsHistory = user.pointsHistory.Substring(0, lastIndex);                   
+                                                
                     }
                     else
                     {

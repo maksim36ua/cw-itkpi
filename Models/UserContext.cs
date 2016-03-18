@@ -11,9 +11,6 @@ namespace cw_itkpi.Models
     {
         public DbSet<UserInfo> Users { get; set; }
 
-        //public UserContext(DbContextOptions options) : base(options)
-        //{ }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Make NameId required
