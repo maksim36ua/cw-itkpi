@@ -76,6 +76,13 @@ namespace cw_itkpi.Controllers
             return View();
         }
 
+        public IActionResult RatingWithVKpage()
+        {
+            return View(_context.Users
+                .Where(user => user.thisWeekHonor != 0)
+                .OrderByDescending(user => user.thisWeekHonor).ToList());
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Rating(AdminClass admin)
@@ -87,7 +94,7 @@ namespace cw_itkpi.Controllers
                     case "Generate":
                         {
                             GenerateWeeklyRating();
-                            break;
+                            return RedirectToAction("RatingWithVKpage");
                         }
                     case "Update":
                         {
@@ -129,11 +136,12 @@ namespace cw_itkpi.Controllers
                     user.RetrieveValues();
                     user.pointsHistory += " " + user.honor;
                     user.lastWeekHonor = user.honor;
+                    user.thisWeekHonor = user.honor - user.lastWeekHonor;
                     _context.Entry(user).State = Microsoft.Data.Entity.EntityState.Modified;
                 });
             _context.SaveChanges();
 
-            UpdateWeeklyRating();
+            //UpdateWeeklyRating();
         }        
 
         public void DeleteWeeklyRating()
@@ -162,7 +170,7 @@ namespace cw_itkpi.Controllers
                 });
             _context.SaveChanges();
 
-            UpdateWeeklyRating();
+            //UpdateWeeklyRating();
         }
     }
 }
